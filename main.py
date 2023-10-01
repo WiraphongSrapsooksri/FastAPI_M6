@@ -1,11 +1,24 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image, ImageDraw, ImageFont
 import io
 import base64
 import json
 
+
+
 app = FastAPI()
 
+# Configure CORS
+origins = ["*"]  # You can specify the allowed origins here, e.g., ["http://localhost", "https://example.com"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/draw_image/{number}/{nameH}")
 async def draw_image(number: str,nameH:str):
     with open('datauser.json', mode='r') as my_file:
