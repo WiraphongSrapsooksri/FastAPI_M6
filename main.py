@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from PIL import Image, ImageDraw, ImageFont
 import io
 import base64
 import json
-
+import uvicorn
 
 
 app = FastAPI()
@@ -68,3 +69,4 @@ async def draw_image(number: str,nameH:str):
         base64_image = base64.b64encode(buffer.getvalue()).decode()
 
         return {"base64_image": base64_image}
+
