@@ -60,7 +60,7 @@ async def draw_image(number: str,nameH:str):
         # img.save('graph.png')
 
         # Show the image
-        img.show()
+        # img.show()
 
         # Convert the image to a base64 string
         buffer = io.BytesIO()
