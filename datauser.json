@@ -1,0 +1,63 @@
+[
+    {
+      "cid": "1",
+      "username": "user1",
+      "password": "1234",
+      "status": "1",
+      "img1": "https://i.ibb.co/tMBQHrk/340618868-899903277951742-6679712580878809918-n.jpg"
+    },
+    {
+      "cid": "2",
+      "username": "Katen",
+      "password": "1234",
+      "status": "2",
+      "img1":"https://i.ibb.co/ch9jb2M/1111.png",
+      "img2":"https://i.ibb.co/x1tNP1R/user2-2.jpg"
+    },
+    {
+      "cid": "3",
+      "username": "mark",
+      "password": "1234",
+      "status": "2",
+      "img1": "https://i.ibb.co/mbN4rJz/main3.jpg"
+      },
+      {
+        "cid": "4",
+        "username": "Aum01",
+        "password": "1234",
+        "status": "2",
+        "img1": "https://i.ibb.co/DK7Wdxw/4-K.png"
+      },
+      {
+        "cid": "5",
+        "username": "So888",
+        "password": "1234",
+        "status": "2",
+        "img1": "https://i.ibb.co/gVD2rKt/369941445-1358481778404170-4550030887892921741-n.jpg"
+      },
+      {
+        "cid": "6",
+        "username": "Ploy",
+        "password": "1234",
+        "status": "2",
+        "img1": "https://i.ibb.co/Dkp04BS/image.jpg"
+      },
+      {
+        "cid": "7",
+        "username": "mark42",
+        "password": "6275",
+        "status": "2",
+        "img1": "https://i.ibb.co/QkcGn0Z/16.png"
+      },
+      {
+        "cid": "8",
+        "username": "AAK",
+        "password": "1234",
+        "status": "2",
+        "img1": "https://i.ibb.co/RcSLkj2/5555.png",
+        "font":"./font/Kanit-Light.ttf",
+        "imglocal":"./img/user8_3.png"
+      }
+      
+  ]
+  
