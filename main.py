@@ -6,6 +6,8 @@ from PIL import Image, ImageDraw, ImageFont
 import io
 import base64
 import json
+import urllib.parse
+
 
 
 
@@ -42,7 +44,7 @@ async def draw_image(number: str,nameH:str):
 
         font = ImageFont.truetype(user_data['font'], size=76)  
         # Text to be drawn
-        txt = nameH
+        txt = urllib.parse.quote(nameH)
 
         def create_image(message, font):
             _, _, w, h = draw.textbbox((0, 0), message, font=font)
