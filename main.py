@@ -1,6 +1,6 @@
 from fastapi import FastAPI,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import JSONResponse,FileResponse
 import datetime
 from PIL import Image, ImageDraw, ImageFont
 import io
@@ -30,9 +30,7 @@ global B
 global ARR1
 global ARR2
 global ARR3
-ARR1 = [51,58,52]
-ARR2 = [39,31,36]
-ARR3 = [431,451,453]
+
 
 def draw_name(draw,pos,name,text_color,font,aligb,stroke_width,stroke_fill):
     draw.text(pos,name,fill=text_color, font=font, align=aligb, stroke_width=stroke_width, stroke_fill=stroke_fill)
@@ -113,7 +111,7 @@ def get_random_unique_number_oune(input_number):
 
 
 def RANDOMNUMBER():
-    print("RANDOM NUMBER")
+    
     global A,B,ARR1,ARR2,ARR3
     random_num1 = get_random_number(0, 9)
     random_num2 = get_random_number(0, 9, random_num1)
@@ -126,6 +124,86 @@ def RANDOMNUMBER():
     ARR1 = arr1
     ARR2 = arr2
     ARR3 = arr3
+
+# ===================================================
+@app.post("/draw_user1_listname")
+async def draw_image(json_data: dict):
+    try:
+        number = json_data["number"]
+        listname = json_data["listname"]
+
+        with open('Datausers.json', mode='r') as my_file:
+            data = json.load(my_file)
+
+        found = False 
+
+        for user_data in data:
+            if int(number) == int(user_data['cid']):
+                found = True
+                break 
+        listsputname = []
+        listsputname = listname.split(",")
+        
+        if not found:
+            print(False)
+        else:
+            listbase64  = []    
+            for elemennamet in listsputname:
+                
+                img = Image.open(user_data['imglocal'])
+                draw = ImageDraw.Draw(img)
+                
+                current_date = datetime.datetime.now()
+                formatted_date = current_date.strftime("%d/%m/%Y")
+
+                RANDOMNUMBER()
+                fontname = ImageFont.truetype(user_data['font1'], size=70)  
+                fonttime = ImageFont.truetype(user_data['font1'], size=45)
+                fontNUMMAIN = ImageFont.truetype(user_data['font1'], size=150)  
+                fontARR1 = ImageFont.truetype(user_data['font1'], size=90)  
+                fontARR3 = ImageFont.truetype(user_data['font1'], size=54)  
+
+
+                def create_image(message, font):
+                    _, _, w, h = draw.textbbox((0, 0), message, font=font)
+                    return w,h
+                
+                text_width, text_height = create_image(elemennamet, fontname)
+                time_width, time_height = create_image(formatted_date, fonttime)
+
+                line_color = (255, 255, 255) 
+
+                positionname = ((img.width - text_width) // 2, 75)
+                positiontime = ((img.width - time_width) // 2, 185)
+
+                draw_name(draw,positionname,elemennamet,(253, 205, 0),fontname,"center",5,(0, 0, 0))
+                draw_line_name(draw,((img.width - text_width) // 2),50,text_width,text_height,line_color,5)
+                
+                draw_name(draw,positiontime,formatted_date,(255, 255, 255),fonttime,"center",3,(0, 0, 0))
+
+                draw.text((200,380),str(A)+"-"+str(B),fill=(255, 255, 255) , font=fontNUMMAIN, align="center", stroke_width=10, stroke_fill=(0,0,0))
+
+                for index, element in enumerate(ARR1):
+                    draw.text((610,(280+(index*130))),str(element),fill=(255, 255, 255) , font=fontARR1, align="center", stroke_width=5, stroke_fill=(0,0,0))
+                
+                for index, element in enumerate(ARR2):
+                    draw.text((820,(280+(index*130))),str(element),fill=(255, 255, 255) , font=fontARR1, align="center", stroke_width=5, stroke_fill=(0,0,0))
+
+                for index, element in enumerate(ARR3):
+                    draw.text((120+(index*140),650),str(element),fill=(255, 255, 255) , font=fontARR3, align="center", stroke_width=5, stroke_fill=(0,0,0))
+                
+                buffer = io.BytesIO()
+                img.save(buffer, format="PNG")
+                base64_image = base64.b64encode(buffer.getvalue()).decode()
+                result = {"name":elemennamet,"base64_image":base64_image}
+                listbase64.append(result)            
+            
+            return JSONResponse(content={"listbase64": listbase64})
+        
+    except KeyError:
+        raise HTTPException(status_code=400, detail="Invalid JSON data. 'number' and 'nameH' fields are required.")
+    
+
 
  
 # ========================================  user1 Katen    ======================================================================================
