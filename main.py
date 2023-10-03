@@ -19,8 +19,7 @@ origins = ["*"]  # You can specify the allowed origins here, e.g., ["http://loca
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5500"],  
-    # allow_origins=["https://web-m6-v2.vercel.app/"],  
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
