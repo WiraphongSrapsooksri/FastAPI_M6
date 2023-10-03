@@ -1,0 +1,12 @@
+[
+    {
+        "cid": "1",
+        "username": "Kanit",
+        "password": "1234",        
+        "img1": "https://i.ibb.co/RcSLkj2/5555.png",
+        "font1":"./font/Chonburi-Regular.ttf",
+        "font2":"./font/",
+        "font3":"./font/",
+        "imglocal":"./img/user1_katen.png"
+      }
+]
